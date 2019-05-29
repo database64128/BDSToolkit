@@ -24,7 +24,9 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += MainWindow_Loaded;
+            /*MainWindow1.Width = SystemParameters.VirtualScreenWidth / 2;
+            MainWindow1.Height = SystemParameters.VirtualScreenHeight * 3 / 2;*/
+            // Loaded += MainWindow_Loaded;
         }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
