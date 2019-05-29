@@ -75,10 +75,13 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="🔎">
-
+                <Label Content="To be populated." Background="#00000000" Foreground="White" />
+            </TabItem>
+            <TabItem Header="🛠">
+                <Label Content="To be populated." Background="#00000000" Foreground="White" FontSize="21.333" />
             </TabItem>
             <TabItem Header="⚙">
-
+                <Label Content="To be populated." Background="#00000000" Foreground="White" />
             </TabItem>
         </TabControl>
 
