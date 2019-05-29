@@ -30,6 +30,7 @@
               <xs:element name="GamerTag" msprop:Generator_ColumnVarNameInTable="columnGamerTag" msprop:Generator_ColumnPropNameInRow="GamerTag" msprop:Generator_ColumnPropNameInTable="GamerTagColumn" msprop:Generator_UserColumnName="GamerTag" type="xs:string" minOccurs="0" />
               <xs:element name="TimeConnect" msprop:Generator_ColumnVarNameInTable="columnTimeConnect" msprop:Generator_ColumnPropNameInRow="TimeConnect" msprop:Generator_ColumnPropNameInTable="TimeConnectColumn" msprop:Generator_UserColumnName="TimeConnect" type="xs:dateTime" minOccurs="0" />
               <xs:element name="TimeDisconnect" msprop:Generator_ColumnVarNameInTable="columnTimeDisconnect" msprop:Generator_ColumnPropNameInRow="TimeDisconnect" msprop:Generator_ColumnPropNameInTable="TimeDisconnectColumn" msprop:Generator_UserColumnName="TimeDisconnect" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TimePlayed" msprop:Generator_ColumnVarNameInTable="columnTimePlayed" msprop:Generator_ColumnPropNameInRow="TimePlayed" msprop:Generator_ColumnPropNameInTable="TimePlayedColumn" msprop:Generator_UserColumnName="TimePlayed" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

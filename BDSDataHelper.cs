@@ -72,7 +72,7 @@ namespace WpfApp1
                 }
             }
 
-            //Update Table_Players Form Table_LogRecords
+            //Update Table_Players and Table_Connections Form Table_LogRecords
             List<ulong> xuidList = new List<ulong>();
             Dictionary<ulong, string> lastUsername = new Dictionary<ulong, string>();
             Dictionary<ulong, int> logonCount = new Dictionary<ulong, int>();
@@ -110,13 +110,22 @@ namespace WpfApp1
                         lastUsername[xuid] = (string)dr["GamerTag"];
                     }
                 }
-                else
+                else if((string)dr["RecordType"] == "Disconnected")
                 {
                     timePlayed[xuid] += (DateTime)dr["Time"] - lastConnection[xuid];
+
+                    //Add Rows to Table_Connections
+                    DataRow dr1 = ds.T_Connections.NewRow();
+                    dr1["XUID"] = xuid;
+                    dr1["GamerTag"] = lastUsername[xuid];
+                    dr1["TimeConnect"] = lastConnection[xuid];
+                    dr1["TimeDisconnect"] = dr["Time"];
+                    dr1["TimePlayed"] = (DateTime)dr["Time"] - lastConnection[xuid];
+                    ds.T_Connections.Rows.Add(dr1);
                 }
             }
 
-            //Add Rows to DataTable
+            //Add Rows to Table_Players
             foreach (ulong xuid in xuidList)
             {
                 DataRow dr = ds.T_Players.NewRow();
@@ -147,6 +156,14 @@ namespace WpfApp1
             return ds.T_Players.Rows;
         }
 
+        /// <summary>
+        /// Returns all Rows in Table_Connections
+        /// </summary>
+        /// <returns></returns>
+        public DataRowCollection GetConnections()
+        {
+            return ds.T_Connections.Rows;
+        }
 
         private BDSData ds;
 
