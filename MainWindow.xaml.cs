@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
 
 namespace WpfApp1
 {
@@ -30,6 +31,13 @@ namespace WpfApp1
         {
             MinWidth = Width;
             MinHeight = Height;
+        }
+
+        private void Log_input_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BDSDataHelper data = new BDSDataHelper(log_input.Text);
+            connection_log.ItemsSource = data.GetRecords();
+            playtime_records.ItemsSource = data.GetPlayers();
         }
     }
 }
