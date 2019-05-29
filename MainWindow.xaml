@@ -5,43 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Jungle City Server" SnapsToDevicePixels="True" SizeToContent="WidthAndHeight" WindowStyle="SingleBorderWindow">
+        Title="Jungle City Server" SnapsToDevicePixels="True" SizeToContent="WidthAndHeight" WindowStyle="SingleBorderWindow" Background="#FF000040">
     <Grid MinWidth="820" MinHeight="600">
-        <Grid.Background>
-            <ImageBrush ImageSource="D:\Pictures\Movies\La La Land (2016)\p2404046516.jpg"/>
-        </Grid.Background>
-        <TextBlock HorizontalAlignment="Left" Margin="50,10,0,548.4" Background="#00000000" FontFamily="Segoe UI" Text="Jungle City Server - Player Records" Foreground="White" FontSize="26.667" Width="739" VerticalAlignment="Top"/>
-        <ListView x:Name="playtime_records" Margin="50,60,10,408.4" Background="#7F000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16">
-            <ListView.View>
-                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Playtime Records">
-                    <GridViewColumn Header="Player" Width="150"/>
-                    <GridViewColumn Header="Connection Times" Width="200"/>
-                    <GridViewColumn Header="Time Played" Width="200"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="50,330,0,0" Background="#7F000000" VerticalAlignment="Top" FontSize="16" Height="240">
-            <ListView.View>
-                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Connection Records">
-                    <GridViewColumn Header="Time" Width="200"/>
-                    <GridViewColumn Header="Player" Width="150"/>
-                    <GridViewColumn Header="Event" Width="150"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TextBox
-            x:Name="log_input"
-            HorizontalAlignment="Left"
-            Margin="50,600,0,10"
-            FontFamily="Consolas"
-            Text="Paste your logs here"
-            VerticalScrollBarVisibility="Visible"
-            AcceptsReturn="True"
-            TextWrapping="Wrap" Background="#7F000000" Foreground="White" Width="349.5" d:LayoutOverrides="HorizontalAlignment" Height="310.48" VerticalAlignment="Top"/>
+
         <DockPanel HorizontalAlignment="Left" LastChildFill="False" Width="40" Background="#7F000000">
             <Button Content="🏠" DockPanel.Dock="Top" Width="40" Height="40" Background="#00000000" Foreground="#BFFFFFFF"/>
             <Button Content="🔎" DockPanel.Dock="Top" Width="40" Height="40" Background="#00000000" Foreground="#BFFFFFFF"/>
             <Button Content="⚙" DockPanel.Dock="Bottom" Width="40" Height="40" Background="#00000000" Foreground="#BFFFFFFF"/>
         </DockPanel>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" Height="600" VerticalScrollBarVisibility="Auto">
+            <StackPanel HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top">
+                <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Jungle City Server - Player Records" Foreground="White" FontSize="26.667" Width="739" VerticalAlignment="Top"/>
+                <ListView x:Name="playtime_records" Margin="32,32,10,0" Background="#7F000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Playtime Records">
+                            <GridViewColumn Header="Player" Width="150"/>
+                            <GridViewColumn Header="Connection Times" Width="200"/>
+                            <GridViewColumn Header="Time Played" Width="200"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="32,32,0,0" Background="#7F000000" VerticalAlignment="Top" FontSize="16" Height="240">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Connection Records">
+                            <GridViewColumn Header="Time" Width="200"/>
+                            <GridViewColumn Header="Player" Width="150"/>
+                            <GridViewColumn Header="Event" Width="150"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <TextBox
+                    x:Name="log_input"
+                    HorizontalAlignment="Left"
+                    Margin="32,32,0,10"
+                    FontFamily="Consolas"
+                    Text="Paste your logs here"
+                    VerticalScrollBarVisibility="Visible"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    Background="#7F000000"
+                    Foreground="White"
+                    Width="349.5"
+                    d:LayoutOverrides="HorizontalAlignment"
+                    Height="310.48"
+                    VerticalAlignment="Top"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
