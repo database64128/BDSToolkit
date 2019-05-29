@@ -1,6 +1,6 @@
-# WpfApp1
+# Minecraft Bedrock Dedicated Server Toolkit
 
-This is an experimental .NET Core WPF app. We aim to make it the default GUI for our *BDS Player Record*.
+A server log parser and player management toolkit for Minecraft Bedrock Dedicated Server.
 
 ## License
 Released under GNU GPLv3.
