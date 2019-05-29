@@ -4,7 +4,7 @@ using System.Text;
 using System.Data;
 using System.IO;
 
-namespace WpfApp1
+namespace BDSPlayerMgmt
 {
     class BDSDataHelper
     {

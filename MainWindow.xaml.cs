@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 
-namespace WpfApp1
+namespace BDSPlayerMgmt
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

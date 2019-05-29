@@ -1,11 +1,10 @@
-﻿<Window x:Name="MainWindow1" x:Class="WpfApp1.MainWindow"
+﻿<Window x:Name="MainWindow1" x:Class="BDSPlayerMgmt.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Jungle City Server"
+        Title="Bedrock Dedicated Server Player Management"
         SnapsToDevicePixels="True"
         SizeToContent="WidthAndHeight"
         WindowStyle="SingleBorderWindow"
@@ -41,8 +40,9 @@
             <TabItem Header="🏠">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
                     <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
-                        <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Jungle City Server - Player Records" Foreground="White" FontSize="26.667" Width="739" VerticalAlignment="Top"/>
-                        <ListView x:Name="playtime_records" Margin="32,32,10,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16">
+                        <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Dashboard" Foreground="White" FontSize="28" Width="739" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Player Records" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
+                        <ListView x:Name="playtime_records" Margin="32,10,10,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16">
                             <ListView.View>
                                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Playtime Records">
                                     <GridViewColumn Header="Player" Width="150" DisplayMemberBinding="{Binding GamerTag}" />
@@ -53,7 +53,8 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="32,32,0,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" FontSize="16" Height="240">
+                        <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Connection Logs" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
+                        <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="32,10,0,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" FontSize="16" Height="240">
                             <ListView.View>
                                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Connection Records">
                                     <GridViewColumn Header="Player" Width="150" DisplayMemberBinding="{Binding GamerTag}" />
@@ -64,10 +65,11 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
+                        <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="[DEBUG] Log Input" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                         <TextBox
                         x:Name="log_input"
                         HorizontalAlignment="Left"
-                        Margin="32,32,0,10"
+                        Margin="32,10,0,10"
                         FontFamily="Consolas"
                         Text="Paste your logs here"
                         VerticalScrollBarVisibility="Visible"
