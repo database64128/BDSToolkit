@@ -43,6 +43,15 @@
                         <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Dashboard" Foreground="White" FontSize="28" Width="739" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Player Records" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                         <ListView x:Name="playtime_records" Margin="32,10,10,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16">
+                            <ListView.ItemContainerStyle>
+                                <Style>
+                                    <Style.Triggers>
+                                        <Trigger Property="Control.IsMouseOver" Value="True">
+                                            <Setter Property="Control.Background" Value="Transparent" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Playtime Records">
                                     <GridViewColumn Header="Player" Width="150" DisplayMemberBinding="{Binding GamerTag}" />
@@ -55,6 +64,17 @@
                         </ListView>
                         <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Connection Logs" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                         <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="32,10,0,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" FontSize="16" Height="240">
+                            <ListView.Resources>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                                <GridViewRowPresenter />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Connection Records">
                                     <GridViewColumn Header="Player" Width="150" DisplayMemberBinding="{Binding GamerTag}" />
