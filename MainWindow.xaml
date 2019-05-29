@@ -38,7 +38,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
                     <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
                     <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Jungle City Server - Player Records" Foreground="White" FontSize="26.667" Width="739" VerticalAlignment="Top"/>
-                    <ListView x:Name="playtime_records" Margin="32,32,10,0" Background="#7F000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16">
+                    <ListView x:Name="playtime_records" Margin="32,32,10,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16">
                         <ListView.View>
                             <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Playtime Records">
                                 <GridViewColumn Header="Player" Width="150" DisplayMemberBinding="{Binding GamerTag}" />
@@ -49,7 +49,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="32,32,0,0" Background="#7F000000" VerticalAlignment="Top" FontSize="16" Height="240">
+                        <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="32,32,0,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" FontSize="16" Height="240">
                         <ListView.View>
                             <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Connection Records">
                                 <GridViewColumn Header="Time" Width="200" DisplayMemberBinding="{Binding Time}" />
@@ -67,7 +67,7 @@
                         VerticalScrollBarVisibility="Visible"
                         AcceptsReturn="True"
                         TextWrapping="Wrap"
-                        Background="#7F000000"
+                        Background="#19000000"
                         Foreground="White"
                         Width="349.5"
                         d:LayoutOverrides="HorizontalAlignment"
@@ -77,13 +77,25 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="🔎">
-                <Label Content="To be populated." Background="#00000000" Foreground="White" />
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+                    <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                        <Label Content="To be populated." Background="#00000000" Foreground="White" FontSize="21.333" />
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="🛠">
-                <Label Content="To be populated." Background="#00000000" Foreground="White" FontSize="21.333" />
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+                    <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                        <Label Content="To be populated." Background="#00000000" Foreground="White" FontSize="21.333" />
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="⚙">
-                <Label Content="To be populated." Background="#00000000" Foreground="White" />
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+                    <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                        <Label Content="To be populated." Background="#00000000" Foreground="White" FontSize="21.333" />
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
 
