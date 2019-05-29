@@ -36,7 +36,7 @@ namespace WpfApp1
         private void Log_input_TextChanged(object sender, TextChangedEventArgs e)
         {
             BDSDataHelper data = new BDSDataHelper(log_input.Text);
-            connection_log.ItemsSource = data.GetRecords();
+            connection_log.ItemsSource = data.GetConnections();
             playtime_records.ItemsSource = data.GetPlayers();
         }
     }

@@ -671,6 +671,8 @@ namespace WpfApp1 {
             
             private global::System.Data.DataColumn columnTimeDisconnect;
             
+            private global::System.Data.DataColumn columnTimePlayed;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public T_ConnectionsDataTable() {
@@ -738,6 +740,14 @@ namespace WpfApp1 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TimePlayedColumn {
+                get {
+                    return this.columnTimePlayed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -773,13 +783,14 @@ namespace WpfApp1 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public T_ConnectionsRow AddT_ConnectionsRow(ulong XUID, string GamerTag, System.DateTime TimeConnect, System.DateTime TimeDisconnect) {
+            public T_ConnectionsRow AddT_ConnectionsRow(ulong XUID, string GamerTag, System.DateTime TimeConnect, System.DateTime TimeDisconnect, string TimePlayed) {
                 T_ConnectionsRow rowT_ConnectionsRow = ((T_ConnectionsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         XUID,
                         GamerTag,
                         TimeConnect,
-                        TimeDisconnect};
+                        TimeDisconnect,
+                        TimePlayed};
                 rowT_ConnectionsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowT_ConnectionsRow);
                 return rowT_ConnectionsRow;
@@ -806,6 +817,7 @@ namespace WpfApp1 {
                 this.columnGamerTag = base.Columns["GamerTag"];
                 this.columnTimeConnect = base.Columns["TimeConnect"];
                 this.columnTimeDisconnect = base.Columns["TimeDisconnect"];
+                this.columnTimePlayed = base.Columns["TimePlayed"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -819,6 +831,8 @@ namespace WpfApp1 {
                 base.Columns.Add(this.columnTimeConnect);
                 this.columnTimeDisconnect = new global::System.Data.DataColumn("TimeDisconnect", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTimeDisconnect);
+                this.columnTimePlayed = new global::System.Data.DataColumn("TimePlayed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTimePlayed);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1452,6 +1466,22 @@ namespace WpfApp1 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string TimePlayed {
+                get {
+                    try {
+                        return ((string)(this[this.tableT_Connections.TimePlayedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("表“T_Connections”中列“TimePlayed”的值为 DBNull。", e);
+                    }
+                }
+                set {
+                    this[this.tableT_Connections.TimePlayedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsXUIDNull() {
                 return this.IsNull(this.tableT_Connections.XUIDColumn);
             }
@@ -1496,6 +1526,18 @@ namespace WpfApp1 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetTimeDisconnectNull() {
                 this[this.tableT_Connections.TimeDisconnectColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTimePlayedNull() {
+                return this.IsNull(this.tableT_Connections.TimePlayedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTimePlayedNull() {
+                this[this.tableT_Connections.TimePlayedColumn] = global::System.Convert.DBNull;
             }
         }
         
