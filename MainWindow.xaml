@@ -14,7 +14,7 @@
             <Button Content="⚙" DockPanel.Dock="Bottom" Width="40" Height="40" Background="#00000000" Foreground="#BFFFFFFF"/>
         </DockPanel>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" Height="600" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" Height="600" VerticalScrollBarVisibility="Auto" Margin="40,0,0,0">
             <StackPanel HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top">
                 <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Jungle City Server - Player Records" Foreground="White" FontSize="26.667" Width="739" VerticalAlignment="Top"/>
                 <ListView x:Name="playtime_records" Margin="32,32,10,0" Background="#7F000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16">
