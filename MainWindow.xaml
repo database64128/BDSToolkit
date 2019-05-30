@@ -9,6 +9,189 @@
         SizeToContent="WidthAndHeight"
         WindowStyle="SingleBorderWindow"
         Background="#FF202040">
+    <Window.Resources>
+        <Style x:Key="GridViewColumnHeaderGripper"
+            TargetType="Thumb">
+            <Setter Property="Width"
+                Value="18" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="White" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border Padding="{TemplateBinding Padding}"
+                            Background="Transparent">
+                            <Rectangle HorizontalAlignment="Center"
+                                Width="1"
+                                Fill="{TemplateBinding Background}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1"
+                            StartPoint="0.5,0">
+                        <GradientStop Color="Red"
+                            Offset="0" />
+                        <GradientStop Color="Yellow"
+                            Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="{x:Type GridViewColumnHeader}"
+            TargetType="GridViewColumnHeader">
+            <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+            <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+            <Setter Property="Foreground"
+                Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewColumnHeader">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames
+                                                Storyboard.TargetName="HeaderBorder"
+                                                Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.25" Value="LightGray" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed" />
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="HeaderBorder"
+                                BorderThickness="0,1,0,1"
+                                Padding="2,0,2,0">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="White" />
+                                </Border.BorderBrush>
+                                <Border.Background>
+                                    <SolidColorBrush Color="#7FFFFFFF" />
+                                </Border.Background>
+                                <ContentPresenter x:Name="HeaderContent"
+                                    Margin="0,0,0,1"
+                                    RecognizesAccessKey="True"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/> 
+                            </Border>
+                            <Thumb x:Name="PART_HeaderGripper"
+                                HorizontalAlignment="Right"
+                                Margin="0,0,-9,0"
+                                Style="{StaticResource GridViewColumnHeaderGripper}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Role"
+                    Value="Floating">
+                    <Setter Property="Opacity"
+                        Value="0.7" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="GridViewColumnHeader">
+                                <Canvas Name="PART_FloatingHeaderCanvas">
+                                    <Rectangle Fill="#60000000"
+                                        Width="{TemplateBinding ActualWidth}"
+                                        Height="{TemplateBinding ActualHeight}" />
+                                </Canvas>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="Role"
+                    Value="Padding">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="GridViewColumnHeader">
+                                <Border Name="HeaderBorder"
+                                    BorderThickness="0,1,0,1">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="Gray" />
+                                    </Border.Background>
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush Color="Gray" />
+                                    </Border.BorderBrush>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="{x:Type ListViewItem}"
+            TargetType="ListViewItem">
+            <Setter Property="SnapsToDevicePixels"
+                Value="true" />
+            <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Border"
+                                Padding="2"
+                                SnapsToDevicePixels="true"
+                                Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames
+                                                                        Storyboard.TargetName="Border"
+                                                                        Storyboard.TargetProperty="(Panel.Background).
+                                                                        (SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.25" Value="DarkSeaGreen" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames
+                                                                        Storyboard.TargetName="Border"
+                                                                        Storyboard.TargetProperty="(Panel.Background).
+                                                                        (SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.25" Value="LightSeaGreen" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames
+                                                                        Storyboard.TargetName="Border"
+                                                                        Storyboard.TargetProperty="(Panel.Background).
+                                                                        (SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.25" Value="Gray" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
         <TabControl Margin="10" BorderBrush="Gainsboro" Background="{x:Null}">
@@ -43,15 +226,6 @@
                         <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Dashboard" Foreground="White" FontSize="28" Width="739" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Player Records" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                         <ListView x:Name="playtime_records" Margin="32,10,10,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.ScrollUnit="Pixel">
-                            <ListView.ItemContainerStyle>
-                                <Style>
-                                    <Style.Triggers>
-                                        <Trigger Property="Control.IsMouseOver" Value="True">
-                                            <Setter Property="Control.Background" Value="Transparent" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ListView.ItemContainerStyle>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Playtime Records">
                                     <GridViewColumn Header="Player" Width="150" DisplayMemberBinding="{Binding GamerTag}" />
@@ -64,61 +238,6 @@
                         </ListView>
                         <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Connection Logs" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                         <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="32,10,0,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" FontSize="16" Height="240" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.ScrollUnit="Pixel">
-                            <ListView.Resources>
-                                <Style TargetType="{x:Type ListViewItem}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                                <Border x:Name="Border"
-                                                        Padding="2"
-                                                        SnapsToDevicePixels="true"
-                                                        Background="Transparent">
-                                                    <VisualStateManager.VisualStateGroups>
-                                                        <VisualStateGroup x:Name="CommonStates">
-                                                            <VisualState x:Name="Normal" />
-                                                            <VisualState x:Name="MouseOver">
-                                                                <Storyboard>
-                                                                    <ColorAnimationUsingKeyFrames
-                                                                        Storyboard.TargetName="Border"
-                                                                        Storyboard.TargetProperty="(Panel.Background).
-                                                                        (SolidColorBrush.Color)">
-                                                                        <EasingColorKeyFrame KeyTime="0" Value="DarkSeaGreen" />
-                                                                    </ColorAnimationUsingKeyFrames>
-                                                                </Storyboard>
-                                                            </VisualState>
-                                                            <VisualState x:Name="Disabled" />
-                                                        </VisualStateGroup>
-                                                        <VisualStateGroup x:Name="SelectionStates">
-                                                            <VisualState x:Name="Unselected" />
-                                                            <VisualState x:Name="Selected">
-                                                                <Storyboard>
-                                                                    <ColorAnimationUsingKeyFrames
-                                                                        Storyboard.TargetName="Border"
-                                                                        Storyboard.TargetProperty="(Panel.Background).
-                                                                        (SolidColorBrush.Color)">
-                                                                        <EasingColorKeyFrame KeyTime="0" Value="LightSeaGreen" />
-                                                                    </ColorAnimationUsingKeyFrames>
-                                                                </Storyboard>
-                                                            </VisualState>
-                                                            <VisualState x:Name="SelectedUnfocused">
-                                                                <Storyboard>
-                                                                    <ColorAnimationUsingKeyFrames
-                                                                        Storyboard.TargetName="Border"
-                                                                        Storyboard.TargetProperty="(Panel.Background).
-                                                                        (SolidColorBrush.Color)">
-                                                                        <EasingColorKeyFrame KeyTime="0" Value="Gray" />
-                                                                    </ColorAnimationUsingKeyFrames>
-                                                                </Storyboard>
-                                                            </VisualState>
-                                                        </VisualStateGroup>
-                                                    </VisualStateManager.VisualStateGroups>
-                                                    <GridViewRowPresenter />
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Connection Records">
                                     <GridViewColumn Header="Player" Width="150" DisplayMemberBinding="{Binding GamerTag}" />
