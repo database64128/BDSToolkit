@@ -29,9 +29,8 @@ namespace BDSPlayerMgmt
         /// <param name="log">Server Log Text</param>
         public void UpdateFromLog(string log)
         {
-            //Update Table_LogRecords
+            //Update Table_LogRecords From Server Log Text
             ds.Clear();
-
             foreach (string r in log.Split('\n','\r'))
             {
                 if (
@@ -76,14 +75,170 @@ namespace BDSPlayerMgmt
                 }
             }
 
-            //Update Table_Players and Table_Connections Form Table_LogRecords
+
+            //Read Players and Connections Form Table_LogRecords
             List<ulong> xuidList = new List<ulong>();
+            List<PlayerConnection> connectionList = new List<PlayerConnection>();
             Dictionary<ulong, string> lastUsername = new Dictionary<ulong, string>();
             Dictionary<ulong, int> logonCount = new Dictionary<ulong, int>();
-            Dictionary<ulong, DateTime> lastConnection = new Dictionary<ulong, DateTime>();
+            Dictionary<ulong, bool> isCurrentlyOnline = new Dictionary<ulong, bool>();
+            Dictionary<ulong, DateTime?> lastConnection = new Dictionary<ulong, DateTime?>();
             Dictionary<ulong, TimeSpan> timePlayed = new Dictionary<ulong, TimeSpan>();
             foreach (DataRow dr in ds.T_LogRecords.Rows)
             {
+                if ((string)dr["RecordType"] == "Connected")
+                {
+                    if (
+                        dr["XUID"] != DBNull.Value
+                        && dr["Time"] != DBNull.Value
+                        && dr["GamerTag"] != DBNull.Value
+                        )
+                    {
+                        ulong xuid = (ulong)dr["XUID"];
+                        DateTime time = (DateTime)dr["Time"];
+                        string username = (string)dr["GamerTag"];
+
+                        if (!xuidList.Contains(xuid))
+                        {
+                            xuidList.Add(xuid);
+                            lastUsername.Add(xuid, username);
+                            logonCount.Add(xuid, 1);
+                            isCurrentlyOnline.Add(xuid, true);
+                            lastConnection.Add(xuid, time);
+                            timePlayed.Add(xuid, new TimeSpan(0));
+                        }
+                        else
+                        {
+                            lastUsername[xuid] = username;
+                            logonCount[xuid] += 1;
+                            isCurrentlyOnline[xuid] = true;
+                            if (time > lastConnection[xuid])
+                            {
+                                lastConnection[xuid] = time;
+                            }
+                        }
+                        connectionList.Add(new PlayerConnection
+                        {
+                            XUID = xuid,
+                            Username = username,
+                            TimeConnect = time
+                        });
+                    }
+                }
+                if ((string)dr["RecordType"] == "Disconnected")
+                {
+                    if (
+                        dr["XUID"] != null
+                        && dr["Time"] != null
+                        && dr["GamerTag"] != null
+                        )
+                    {
+                        ulong xuid = (ulong)dr["XUID"];
+                        DateTime time = (DateTime)dr["Time"];
+                        string username = (string)dr["GamerTag"];
+
+                        if (!xuidList.Contains(xuid))
+                        {
+                            xuidList.Add(xuid);
+                            lastUsername.Add(xuid, username);
+                            logonCount.Add(xuid, 0);
+                            isCurrentlyOnline.Add(xuid, false);
+                            lastConnection.Add(xuid, null);
+                            timePlayed.Add(xuid, new TimeSpan(0));
+                        }
+                        else
+                        {
+                            lastUsername[xuid] = username;
+                            if (isCurrentlyOnline[xuid] && lastConnection[xuid] != null)
+                            {
+                                timePlayed[xuid] += time - (DateTime)lastConnection[xuid];
+                            }
+                            isCurrentlyOnline[xuid] = false;
+                        }
+                    }
+                }
+
+            }
+            foreach (DataRow dr in ds.T_LogRecords.Rows)
+            {
+                if ((string)dr["RecordType"] == "Disconnected")
+                {
+                    if (
+                        dr["XUID"] != DBNull.Value
+                        && dr["Time"] != DBNull.Value
+                        && dr["GamerTag"] != DBNull.Value
+                        )
+                    {
+                        ulong xuid = (ulong)dr["XUID"];
+                        DateTime timeDisconnect = (DateTime)dr["Time"];
+                        string username = (string)dr["GamerTag"];
+                        DateTime? timeConnect = null;
+                        foreach (PlayerConnection c in connectionList)
+                        {
+                            if (timeConnect == null || (c.TimeConnect != null && c.TimeConnect > timeConnect && c.TimeConnect < timeDisconnect))
+                            {
+                                timeConnect = c.TimeConnect;
+                            }
+                        }
+                        foreach (PlayerConnection c in connectionList)
+                        {
+                            if (c.TimeConnect != null && c.TimeConnect == timeConnect)
+                            {
+                                c.TimeDisconnect = timeDisconnect;
+                                c.Duration = timeDisconnect - timeConnect;
+                            }
+                        }
+                    }
+                }
+
+            }
+            foreach (PlayerConnection c in connectionList)
+            {
+                if(c.Duration!=null)
+                {
+                    timePlayed[c.XUID] += (TimeSpan)c.Duration;
+                }
+            }
+
+            //Update Table_Players
+            foreach (ulong xuid in xuidList)
+            {
+                if (lastConnection[xuid] != null)
+                {
+                    DataRow dr = ds.T_Players.NewRow();
+                    dr["XUID"] = xuid;
+                    dr["GamerTag"] = lastUsername[xuid];
+                    dr["LastConnection"] = lastConnection[xuid];
+                    dr["LogonCount"] = logonCount[xuid];
+                    dr["TimePlayed"] = timePlayed[xuid];
+                    ds.T_Players.Rows.Add(dr);
+                }
+            }
+
+            //Update Table_Connections
+            foreach (PlayerConnection c in connectionList)
+            {
+                if (
+                    c.TimeConnect != null
+                    && c.TimeDisconnect != null
+                    && c.Duration != null
+                    )
+                {
+                    DataRow dr = ds.T_Connections.NewRow();
+                    dr["XUID"] = c.XUID;
+                    dr["GamerTag"] = c.Username;
+                    dr["TimeConnect"] = c.TimeConnect;
+                    dr["TimeDisconnect"] = c.TimeDisconnect;
+                    dr["Duration"] = c.Duration;
+                    ds.T_Connections.Rows.Add(dr);
+                }
+            }
+
+            /*
+            //Update Table_Connections Form Table_LogRecords
+            {
+
+
                 ulong xuid = (ulong)dr["XUID"];
                 if (!xuidList.Contains(xuid))
                 {
@@ -114,7 +269,7 @@ namespace BDSPlayerMgmt
                         lastUsername[xuid] = (string)dr["GamerTag"];
                     }
                 }
-                else if((string)dr["RecordType"] == "Disconnected")
+                else if ((string)dr["RecordType"] == "Disconnected")
                 {
                     if (lastConnection.ContainsKey(xuid))
                     {
@@ -131,18 +286,8 @@ namespace BDSPlayerMgmt
                     }
                 }
             }
+            */
 
-            //Add Rows to Table_Players
-            foreach (ulong xuid in xuidList)
-            {
-                DataRow dr = ds.T_Players.NewRow();
-                dr["XUID"] = xuid;
-                dr["GamerTag"] = lastUsername[xuid];
-                dr["LastConnection"] = lastConnection[xuid];
-                dr["LogonCount"] = logonCount[xuid];
-                dr["TimePlayed"] = timePlayed[xuid];
-                ds.T_Players.Rows.Add(dr);
-            }
         }
 
         //wip
@@ -227,6 +372,15 @@ namespace BDSPlayerMgmt
             bool ignoresPlayerLimit;
             string name;
             ulong xuid;
+        }
+
+        class PlayerConnection
+        {
+            public ulong XUID { get; set; }
+            public string Username { get; set; }
+            public DateTime? TimeConnect { get; set; }
+            public DateTime? TimeDisconnect { get; set; }
+            public TimeSpan? Duration { get; set; }
         }
     }
 }

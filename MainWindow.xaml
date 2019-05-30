@@ -290,7 +290,7 @@
                                     <GridViewColumn Header="XUID" Width="180" DisplayMemberBinding="{Binding XUID}" />
                                     <GridViewColumn Header="Connect" Width="200" DisplayMemberBinding="{Binding TimeConnect}" />
                                     <GridViewColumn Header="Disonnect" Width="200" DisplayMemberBinding="{Binding TimeDisconnect}" />
-                                    <GridViewColumn Header="Duration" Width="150" DisplayMemberBinding="{Binding TimePlayed}" />
+                                    <GridViewColumn Header="Duration" Width="150" DisplayMemberBinding="{Binding Duration}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>

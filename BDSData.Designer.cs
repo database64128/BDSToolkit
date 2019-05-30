@@ -671,7 +671,7 @@ namespace BDSPlayerMgmt {
             
             private global::System.Data.DataColumn columnTimeDisconnect;
             
-            private global::System.Data.DataColumn columnTimePlayed;
+            private global::System.Data.DataColumn columnDuration;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -740,9 +740,9 @@ namespace BDSPlayerMgmt {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn TimePlayedColumn {
+            public global::System.Data.DataColumn DurationColumn {
                 get {
-                    return this.columnTimePlayed;
+                    return this.columnDuration;
                 }
             }
             
@@ -783,14 +783,14 @@ namespace BDSPlayerMgmt {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public T_ConnectionsRow AddT_ConnectionsRow(ulong XUID, string GamerTag, System.DateTime TimeConnect, System.DateTime TimeDisconnect, string TimePlayed) {
+            public T_ConnectionsRow AddT_ConnectionsRow(ulong XUID, string GamerTag, System.DateTime TimeConnect, System.DateTime TimeDisconnect, System.TimeSpan Duration) {
                 T_ConnectionsRow rowT_ConnectionsRow = ((T_ConnectionsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         XUID,
                         GamerTag,
                         TimeConnect,
                         TimeDisconnect,
-                        TimePlayed};
+                        Duration};
                 rowT_ConnectionsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowT_ConnectionsRow);
                 return rowT_ConnectionsRow;
@@ -817,7 +817,7 @@ namespace BDSPlayerMgmt {
                 this.columnGamerTag = base.Columns["GamerTag"];
                 this.columnTimeConnect = base.Columns["TimeConnect"];
                 this.columnTimeDisconnect = base.Columns["TimeDisconnect"];
-                this.columnTimePlayed = base.Columns["TimePlayed"];
+                this.columnDuration = base.Columns["Duration"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -831,8 +831,8 @@ namespace BDSPlayerMgmt {
                 base.Columns.Add(this.columnTimeConnect);
                 this.columnTimeDisconnect = new global::System.Data.DataColumn("TimeDisconnect", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTimeDisconnect);
-                this.columnTimePlayed = new global::System.Data.DataColumn("TimePlayed", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTimePlayed);
+                this.columnDuration = new global::System.Data.DataColumn("Duration", typeof(global::System.TimeSpan), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDuration);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1466,17 +1466,17 @@ namespace BDSPlayerMgmt {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string TimePlayed {
+            public System.TimeSpan Duration {
                 get {
                     try {
-                        return ((string)(this[this.tableT_Connections.TimePlayedColumn]));
+                        return ((global::System.TimeSpan)(this[this.tableT_Connections.DurationColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("表“T_Connections”中列“TimePlayed”的值为 DBNull。", e);
+                        throw new global::System.Data.StrongTypingException("表“T_Connections”中列“Duration”的值为 DBNull。", e);
                     }
                 }
                 set {
-                    this[this.tableT_Connections.TimePlayedColumn] = value;
+                    this[this.tableT_Connections.DurationColumn] = value;
                 }
             }
             
@@ -1530,14 +1530,14 @@ namespace BDSPlayerMgmt {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsTimePlayedNull() {
-                return this.IsNull(this.tableT_Connections.TimePlayedColumn);
+            public bool IsDurationNull() {
+                return this.IsNull(this.tableT_Connections.DurationColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetTimePlayedNull() {
-                this[this.tableT_Connections.TimePlayedColumn] = global::System.Convert.DBNull;
+            public void SetDurationNull() {
+                this[this.tableT_Connections.DurationColumn] = global::System.Convert.DBNull;
             }
         }
         
