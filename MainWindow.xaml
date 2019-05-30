@@ -63,11 +63,19 @@
                                             <ColorAnimationUsingKeyFrames
                                                 Storyboard.TargetName="HeaderBorder"
                                                 Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
-                                                <EasingColorKeyFrame KeyTime="0:0:0.25" Value="LightGray" />
+                                                <EasingColorKeyFrame KeyTime="0:0:0.25" Value="DarkGray" />
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
-                                    <VisualState x:Name="Pressed" />
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames
+                                                Storyboard.TargetName="HeaderBorder"
+                                                Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0:0:0.25" Value="Gray" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
                                     <VisualState x:Name="Disabled" />
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
@@ -78,7 +86,7 @@
                                     <SolidColorBrush Color="White" />
                                 </Border.BorderBrush>
                                 <Border.Background>
-                                    <SolidColorBrush Color="#7FFFFFFF" />
+                                    <SolidColorBrush Color="LightGray" />
                                 </Border.Background>
                                 <ContentPresenter x:Name="HeaderContent"
                                     Margin="0,0,0,1"
@@ -120,10 +128,10 @@
                                 <Border Name="HeaderBorder"
                                     BorderThickness="0,1,0,1">
                                     <Border.Background>
-                                        <SolidColorBrush Color="Gray" />
+                                        <SolidColorBrush Color="LightGray" />
                                     </Border.Background>
                                     <Border.BorderBrush>
-                                        <SolidColorBrush Color="Gray" />
+                                        <SolidColorBrush Color="LightGray" />
                                     </Border.BorderBrush>
                                 </Border>
                             </ControlTemplate>
@@ -193,26 +201,64 @@
     </Window.Resources>
     
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
-        <TabControl Margin="10" BorderBrush="Gainsboro" Background="{x:Null}">
+        <TabControl Margin="10" BorderBrush="LightGray" Background="{x:Null}">
             <TabControl.Resources>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type TabItem}">
-                                <Border x:Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                                <Border x:Name="Border" CornerRadius="4,4,0,0" Margin="2,0" Background="Gray">
                                     <ContentPresenter x:Name="ContentSite"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
                                         ContentSource="Header"
                                         Margin="10,2"/>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="MouseOver">
+                                                <Storyboard>
+                                                    <ColorAnimationUsingKeyFrames
+                                                                        Storyboard.TargetName="Border"
+                                                                        Storyboard.TargetProperty="(Panel.Background).
+                                                                        (SolidColorBrush.Color)">
+                                                        <EasingColorKeyFrame KeyTime="0:0:0.25" Value="LightGray" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Disabled" />
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="SelectionStates">
+                                            <VisualState x:Name="Unselected" />
+                                            <VisualState x:Name="Selected">
+                                                <Storyboard>
+                                                    <ColorAnimationUsingKeyFrames
+                                                                        Storyboard.TargetName="Border"
+                                                                        Storyboard.TargetProperty="(Panel.Background).
+                                                                        (SolidColorBrush.Color)">
+                                                        <EasingColorKeyFrame KeyTime="0:0:0.25" Value="LightGray" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="SelectedUnfocused">
+                                                <Storyboard>
+                                                    <ColorAnimationUsingKeyFrames
+                                                                        Storyboard.TargetName="Border"
+                                                                        Storyboard.TargetProperty="(Panel.Background).
+                                                                        (SolidColorBrush.Color)">
+                                                        <EasingColorKeyFrame KeyTime="0:0:0.25" Value="LightGray" />
+                                                    </ColorAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
+                                        <Setter TargetName="Border" Property="Background" Value="LightGray" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
-                                        <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                        <Setter TargetName="Border" Property="Background" Value="Gray" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -222,12 +268,12 @@
             </TabControl.Resources>
             <TabItem Header="🏠">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
-                    <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                    <StackPanel Margin="0,0,0,0">
                         <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Dashboard" Foreground="White" FontSize="28" Width="739" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Player Records" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                         <ListView x:Name="playtime_records" Margin="32,10,10,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.ScrollUnit="Pixel">
                             <ListView.View>
-                                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Playtime Records">
+                                <GridView AllowsColumnReorder="true">
                                     <GridViewColumn Header="Player" Width="150" DisplayMemberBinding="{Binding GamerTag}" />
                                     <GridViewColumn Header="XUID" Width="180" DisplayMemberBinding="{Binding XUID}" />
                                     <GridViewColumn Header="Times" Width="100" DisplayMemberBinding="{Binding LogonCount}" />
@@ -239,7 +285,7 @@
                         <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Connection Logs" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                         <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="32,10,0,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" FontSize="16" Height="240" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.ScrollUnit="Pixel">
                             <ListView.View>
-                                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Connection Records">
+                                <GridView AllowsColumnReorder="true">
                                     <GridViewColumn Header="Player" Width="150" DisplayMemberBinding="{Binding GamerTag}" />
                                     <GridViewColumn Header="XUID" Width="180" DisplayMemberBinding="{Binding XUID}" />
                                     <GridViewColumn Header="Connect" Width="200" DisplayMemberBinding="{Binding TimeConnect}" />
@@ -250,20 +296,20 @@
                         </ListView>
                         <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="[DEBUG] Log Input" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                         <TextBox
-                        x:Name="log_input"
-                        HorizontalAlignment="Left"
-                        Margin="32,10,0,10"
-                        FontFamily="Consolas"
-                        Text="Paste your logs here"
-                        VerticalScrollBarVisibility="Visible"
-                        AcceptsReturn="True"
-                        TextWrapping="Wrap"
-                        Background="#19000000"
-                        Foreground="White"
-                        Width="349.5"
-                        d:LayoutOverrides="HorizontalAlignment"
-                        Height="310.48"
-                        VerticalAlignment="Top" TextChanged="Log_input_TextChanged"/>
+                            x:Name="log_input"
+                            HorizontalAlignment="Left"
+                            Margin="32,10,0,10"
+                            FontFamily="Consolas"
+                            Text=""
+                            VerticalScrollBarVisibility="Visible"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            Background="#19000000"
+                            Foreground="White"
+                            Width="349.5"
+                            d:LayoutOverrides="HorizontalAlignment"
+                            Height="310.48"
+                            VerticalAlignment="Top" TextChanged="Log_input_TextChanged"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
