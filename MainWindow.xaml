@@ -42,7 +42,7 @@
                     <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
                         <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Dashboard" Foreground="White" FontSize="28" Width="739" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Player Records" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
-                        <ListView x:Name="playtime_records" Margin="32,10,10,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16">
+                        <ListView x:Name="playtime_records" Margin="32,10,10,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Height="240" FontSize="16" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.ScrollUnit="Pixel">
                             <ListView.ItemContainerStyle>
                                 <Style>
                                     <Style.Triggers>
@@ -63,13 +63,57 @@
                             </ListView.View>
                         </ListView>
                         <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Connection Logs" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
-                        <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="32,10,0,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" FontSize="16" Height="240">
+                        <ListView x:Name="connection_log" HorizontalAlignment="Left" Margin="32,10,0,0" Background="#19000000" Foreground="White" VerticalAlignment="Top" FontSize="16" Height="240" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.ScrollUnit="Pixel">
                             <ListView.Resources>
                                 <Style TargetType="{x:Type ListViewItem}">
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                                <GridViewRowPresenter />
+                                                <Border x:Name="Border"
+                                                        Padding="2"
+                                                        SnapsToDevicePixels="true"
+                                                        Background="Transparent">
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualState x:Name="Normal" />
+                                                            <VisualState x:Name="MouseOver">
+                                                                <Storyboard>
+                                                                    <ColorAnimationUsingKeyFrames
+                                                                        Storyboard.TargetName="Border"
+                                                                        Storyboard.TargetProperty="(Panel.Background).
+                                                                        (SolidColorBrush.Color)">
+                                                                        <EasingColorKeyFrame KeyTime="0" Value="DarkSeaGreen" />
+                                                                    </ColorAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                            <VisualState x:Name="Disabled" />
+                                                        </VisualStateGroup>
+                                                        <VisualStateGroup x:Name="SelectionStates">
+                                                            <VisualState x:Name="Unselected" />
+                                                            <VisualState x:Name="Selected">
+                                                                <Storyboard>
+                                                                    <ColorAnimationUsingKeyFrames
+                                                                        Storyboard.TargetName="Border"
+                                                                        Storyboard.TargetProperty="(Panel.Background).
+                                                                        (SolidColorBrush.Color)">
+                                                                        <EasingColorKeyFrame KeyTime="0" Value="LightSeaGreen" />
+                                                                    </ColorAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                            <VisualState x:Name="SelectedUnfocused">
+                                                                <Storyboard>
+                                                                    <ColorAnimationUsingKeyFrames
+                                                                        Storyboard.TargetName="Border"
+                                                                        Storyboard.TargetProperty="(Panel.Background).
+                                                                        (SolidColorBrush.Color)">
+                                                                        <EasingColorKeyFrame KeyTime="0" Value="Gray" />
+                                                                    </ColorAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+                                                    <GridViewRowPresenter />
+                                                </Border>
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
@@ -104,24 +148,27 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="🔎">
+            <TabItem Header="👩‍👩‍👧‍👧">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
                     <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
-                        <Label Content="To be populated." Background="#00000000" Foreground="White" FontSize="21.333" />
+                        <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Player Management" Foreground="White" FontSize="28" Width="739" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Player List" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="🛠">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
                     <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
-                        <Label Content="To be populated." Background="#00000000" Foreground="White" FontSize="21.333" />
+                        <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Player Permissions" Foreground="White" FontSize="28" Width="739" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Rules" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="⚙">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
                     <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
-                        <Label Content="To be populated." Background="#00000000" Foreground="White" FontSize="21.333" />
+                        <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Settings" Foreground="White" FontSize="28" Width="739" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Background="#00000000" FontFamily="Segoe UI" Text="Log Directory" Foreground="White" FontSize="20" Width="739" VerticalAlignment="Top"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
