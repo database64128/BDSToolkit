@@ -32,7 +32,7 @@ namespace BDSPlayerMgmt
             //Update Table_LogRecords
             ds.T_LogRecords.Clear();
 
-            foreach (string r in log.Split('\n'))
+            foreach (string r in log.Split('\n','\r'))
             {
                 if (
                     r.Length > 0
