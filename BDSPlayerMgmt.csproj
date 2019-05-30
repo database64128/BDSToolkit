@@ -12,6 +12,7 @@
     <Authors>database64128, keito8967</Authors>
     <RepositoryUrl>https://github.com/database64128/BDSToolkit</RepositoryUrl>
     <Description>A server log parser and player management tool for Minecraft Bedrock Dedicated Server.</Description>
+    <StartupObject>BDSPlayerMgmt.App</StartupObject>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

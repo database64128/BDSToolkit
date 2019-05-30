@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace BDSPlayerMgmt
 {
+    /// <summary>
+    /// 
+    /// </summary>
     class BDSDataHelper
     {
         public BDSDataHelper()
@@ -22,7 +26,7 @@ namespace BDSPlayerMgmt
         /// <summary>
         /// Update DataSet From Server Log Text
         /// </summary>
-        /// <param name="log"></param>
+        /// <param name="log">Server Log Text</param>
         public void UpdateFromLog(string log)
         {
             //Update Table_LogRecords
@@ -112,16 +116,19 @@ namespace BDSPlayerMgmt
                 }
                 else if((string)dr["RecordType"] == "Disconnected")
                 {
-                    timePlayed[xuid] += (DateTime)dr["Time"] - lastConnection[xuid];
+                    if (lastConnection.ContainsKey(xuid))
+                    {
+                        timePlayed[xuid] += (DateTime)dr["Time"] - lastConnection[xuid];
 
-                    //Add Rows to Table_Connections
-                    DataRow dr1 = ds.T_Connections.NewRow();
-                    dr1["XUID"] = xuid;
-                    dr1["GamerTag"] = lastUsername[xuid];
-                    dr1["TimeConnect"] = lastConnection[xuid];
-                    dr1["TimeDisconnect"] = dr["Time"];
-                    dr1["TimePlayed"] = (DateTime)dr["Time"] - lastConnection[xuid];
-                    ds.T_Connections.Rows.Add(dr1);
+                        //Add Rows to Table_Connections
+                        DataRow dr1 = ds.T_Connections.NewRow();
+                        dr1["XUID"] = xuid;
+                        dr1["GamerTag"] = lastUsername[xuid];
+                        dr1["TimeConnect"] = lastConnection[xuid];
+                        dr1["TimeDisconnect"] = dr["Time"];
+                        dr1["TimePlayed"] = (DateTime)dr["Time"] - lastConnection[xuid];
+                        ds.T_Connections.Rows.Add(dr1);
+                    }
                 }
             }
 
@@ -136,6 +143,13 @@ namespace BDSPlayerMgmt
                 dr["TimePlayed"] = timePlayed[xuid];
                 ds.T_Players.Rows.Add(dr);
             }
+        }
+
+        //wip
+        public void ImportWhitelist(Stream whitelistJson)
+        {
+            DataContractJsonSerializer whitelistJsonSerializer = new DataContractJsonSerializer(typeof(WhitelistEntry));
+            whitelistJsonSerializer.ReadObject(whitelistJson);
         }
 
         /// <summary>
@@ -165,8 +179,33 @@ namespace BDSPlayerMgmt
             return ds.T_Connections.Rows;
         }
 
+        //wip
+        public void ImportServerSettings()
+        {
+            try
+            {
+                FileStream fs = new FileStream(ServerDirectoryPath, FileMode.Open);
+            }
+            catch
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ServerDirectoryPath { get; set; }
+
+        /// <summary>
+        /// BDS DataSet Instance
+        /// </summary>
         private BDSData ds;
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitBDSData()
         {
             ds = new BDSData();
@@ -180,6 +219,14 @@ namespace BDSPlayerMgmt
             Connected = 0,
             Disconnected = 1,
             Unknown = -1,
+        }
+
+        //wip
+        class WhitelistEntry
+        {
+            bool ignoresPlayerLimit;
+            string name;
+            ulong xuid;
         }
     }
 }
