@@ -30,7 +30,7 @@ namespace BDSPlayerMgmt
         public void UpdateFromLog(string log)
         {
             //Update Table_LogRecords
-            ds.T_LogRecords.Clear();
+            ds.Clear();
 
             foreach (string r in log.Split('\n','\r'))
             {
