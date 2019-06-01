@@ -17,9 +17,8 @@ namespace BDSPlayerMgmt
             InitBDSData();
         }
 
-        public BDSDataHelper(string log)
+        public BDSDataHelper(string log) : this()
         {
-            InitBDSData();
             UpdateFromLog(log);
         }
 
