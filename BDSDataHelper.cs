@@ -148,10 +148,6 @@ namespace BDSPlayerMgmt
                         else
                         {
                             lastUsername[xuid] = username;
-                            if (isCurrentlyOnline[xuid] && lastConnection[xuid] != null)
-                            {
-                                timePlayed[xuid] += time - (DateTime)lastConnection[xuid];
-                            }
                             isCurrentlyOnline[xuid] = false;
                         }
                     }
@@ -190,6 +186,7 @@ namespace BDSPlayerMgmt
                                 {
                                     c.TimeDisconnect = timeDisconnect;
                                     c.Duration = timeDisconnect - timeConnect;
+                                    break;
                                 }
                             }
                         }
