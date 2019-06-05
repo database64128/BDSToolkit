@@ -111,7 +111,7 @@ namespace BDSPlayerMgmt
                             lastUsername[xuid] = username;
                             logonCount[xuid] += 1;
                             isCurrentlyOnline[xuid] = true;
-                            if (time > lastConnection[xuid])
+                            if (lastConnection[xuid] == null || time > lastConnection[xuid])
                             {
                                 lastConnection[xuid] = time;
                             }
@@ -174,17 +174,23 @@ namespace BDSPlayerMgmt
                         DateTime? timeConnect = null;
                         foreach (PlayerConnection c in connectionList)
                         {
-                            if (timeConnect == null || (c.TimeConnect != null && c.TimeConnect > timeConnect && c.TimeConnect < timeDisconnect))
+                            if (c.XUID == xuid)
                             {
-                                timeConnect = c.TimeConnect;
+                                if (timeConnect == null || (c.TimeConnect != null && c.TimeConnect > timeConnect && c.TimeConnect < timeDisconnect))
+                                {
+                                    timeConnect = c.TimeConnect;
+                                }
                             }
                         }
                         foreach (PlayerConnection c in connectionList)
                         {
-                            if (c.TimeConnect != null && c.TimeConnect == timeConnect)
+                            if (c.XUID == xuid)
                             {
-                                c.TimeDisconnect = timeDisconnect;
-                                c.Duration = timeDisconnect - timeConnect;
+                                if (c.TimeConnect != null && c.TimeConnect == timeConnect)
+                                {
+                                    c.TimeDisconnect = timeDisconnect;
+                                    c.Duration = timeDisconnect - timeConnect;
+                                }
                             }
                         }
                     }
